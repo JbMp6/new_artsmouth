@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artsmouth</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="https://kit.fontawesome.com/154242561e.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
