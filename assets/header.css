@@ -1,0 +1,50 @@
+header { 
+    display: flex;
+    justify-content: center; /* centre le menu horizontalement */
+    align-items: center;
+    position: fixed;
+    top: 0;
+    background-color: #000000;
+    width: 100%;
+    height: 100px;
+    padding: 0;
+}
+
+.header_logo {
+    position: absolute; /* logo à gauche indépendant du menu */
+    left: 50px;         /* 50px du bord gauche */
+    width: 270px;
+    height: auto;
+}
+
+nav {
+    display: flex;
+    justify-content: center; /* centre le menu dans le header */
+    align-items: center;
+    width: 1000px;
+}
+
+.menu {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li a {
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: 300;
+    text-transform: uppercase;
+    line-height: 2em;
+    letter-spacing: 0px;
+    margin: 0px 25px 0px 25px;
+}
+
+.menu li a:hover {
+    color: #ff0000;
+}
