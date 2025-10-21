@@ -4,7 +4,7 @@
     <nav>
         <ul class="menu">
             <li><a href="index.php">HOME</a></li>
-            <li><a href="#">FEATURE</a></li>
+            <li><a href="#featured">FEATURE</a></li>
             <li><a href="#">CONTACT</a></li>
             <li><a href="#">WHY</a></li>
             <li><a href="work.php">WORK</a></li>

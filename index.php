@@ -29,11 +29,12 @@
         </div>
 
 
-        <div class="full_container" id="featured">
-            <div class="full_container featured">
+        <div class="full_container center_container" id="featured">
+            <div class="background_image featured" style="background-image: url('assets/images/fond_enter_featured-scaled.jpg');">
                 <div class="h1_container ">
                     <h1>///FEATURED</h1>
                 </div>
+                <?php include __DIR__ . '/includes/featured.php'; ?>
             </div>
         </div>
     </main>

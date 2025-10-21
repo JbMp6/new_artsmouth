@@ -62,7 +62,7 @@ main {
     margin: 0;
     display: flex;
     flex-direction: column;
-    width:50%;
+    width: 1000px;
 }
 
 
@@ -73,8 +73,9 @@ main {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 3440px auto;
 
 }
 
@@ -97,14 +98,11 @@ main {
     font-size: 2em;
 }
 
-.featured{
-    height: calc(100vh - 200px);
-}
-
 .featured h1{
     color: #ffffff;
     font-size: 45px;
     font-weight: 200;
     padding: 0;
-    margin: 0;
+    margin: 150px 0 50px 0;
+
 }
