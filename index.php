@@ -11,8 +11,25 @@
     <?php include __DIR__ . '/includes/header.php'; ?>
     <main>
         <div class="full_container">
-            <h1>Welcome to Artsmouth</h1>
-            <p>Your gateway to the world of art and creativity.</p>
+            <div class="full_container center_container" style= "height: 600px">
+                <?php include __DIR__ . '/includes/home_slider.php'; ?>
+            </div>
+            <div class="fluid_full_container center_container" style="height: 200px; width: 750px;">
+                <div class="ltl_container center_container home_text" style="height: 200px; width: 750px;">
+                    <p>
+                        La découverte de la paire de défenses devint alors le point de départ d'une fabuleuse aventure. <b>Artsmouth est là,</b> un clin d'œil au mammouth Jarkov maintenu dans un bloc de permafrost, ce sol gelé en permanence qui est son linceul depuis plus de 20 000 ans… 
+                    </p>
+                </div>
+            </div>
+            <div class="fluid_full_container center_container" style="height: 150px; width: 750px;">
+                <a class="arrow_down" href="#featured">
+                    <i class="fa-solid fa-angles-down"></i>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="full_container" id="featured">
 
         </div>
     </main>
