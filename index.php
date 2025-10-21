@@ -9,8 +9,9 @@
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
-    <main>
-        <div class="full_container center_container" id="home_slider">
+    <div id="home"></div>
+    <main id="home">
+        <div class="full_container center_container" style="height: 1000px">
             <div class="full_container center_container" style= "height: 600px">
                 <?php include __DIR__ . '/includes/home_slider.php'; ?>
             </div>
@@ -29,14 +30,49 @@
         </div>
 
 
-        <div class="full_container center_container" id="featured">
+        <div class="full_container center_container" id="featured" style="height: 1000px">
             <div class="background_image featured" style="background-image: url('assets/images/fond_enter_featured-scaled.jpg');">
                 <div class="h1_container ">
-                    <h1>///FEATURED</h1>
+                    <h1 class="h1_featured">/// FEATURED</h1>
                 </div>
                 <?php include __DIR__ . '/includes/featured.php'; ?>
             </div>
         </div>
+        <div class="full_container center_container" id="contact" style="height: 1000px">
+            <div class="background_image featured" style="background-image: url('assets/images/fond_enter_contact-scaled.jpg');">
+                <div class="h1_container ">
+                    <h1 class="h1_contact">/// CONTACT</h1>
+                </div>
+                <div class="form-container">
+                    <form>
+                        <input type="text" placeholder="Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <textarea placeholder="Message" required></textarea>
+                        <button type="submit">NOW ! GO TO ARTSMOUTH…</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="full_container center_container" id="why" style="height: 1000px">
+            <div class="background_image featured" style="background-image: url('assets/images/fond_enter_citation-scaled.jpg');">
+                <div class="h1_container ">
+                    <h1 class="h1_why">/// WHY?</h1>
+                </div>
+                <div class="center container text_why" >
+                    <p>
+                        “C’est ce que je fals qui m’apprend ce que je cherche. Mon travail est un espace de questionnement où les sens qu’on lul prête peuvent se falre et défalre. Parce qu’au bout du compte, l’oeuvre vit du regard qu’on lul porte. Elle ne se lImite ni à ce qu’elle est, ni à celui qui l’a produite, elle est falte aussi de celul qui la regarde. Je ne demande rien au spectateur, je lul propose un projet : il en est le libre et nécessaire interprète.”
+                    </p>
+                    <p id="citation_author">
+                        Pierre Soulages
+                    </p>
+                </div>
+                <a class="arrow_down up" href="#home">
+                    <i class="fa-solid fa-angles-down"></i>
+                </a>
+            </div>
+            
+        </div>
+
     </main>
     <?php include __DIR__ . '/includes/footer.php'; ?>
 </body>
