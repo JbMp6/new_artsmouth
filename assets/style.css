@@ -7,6 +7,21 @@ body{
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #ffffff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 200px);
+    padding: 0;
 }
 
 /* Types of containers */
@@ -17,7 +32,7 @@ body{
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 200px);
 }
 
 .fluid_full_container {
