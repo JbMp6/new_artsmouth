@@ -10,7 +10,7 @@
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
     <main>
-        <div class="full_container">
+        <div class="full_container center_container" id="home_slider">
             <div class="full_container center_container" style= "height: 600px">
                 <?php include __DIR__ . '/includes/home_slider.php'; ?>
             </div>
@@ -30,7 +30,11 @@
 
 
         <div class="full_container" id="featured">
-
+            <div class="full_container featured">
+                <div class="h1_container ">
+                    <h1>///FEATURED</h1>
+                </div>
+            </div>
         </div>
     </main>
     <?php include __DIR__ . '/includes/footer.php'; ?>

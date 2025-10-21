@@ -57,6 +57,14 @@ main {
     flex-direction: column;
 }
 
+.h1_container{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    width:50%;
+}
+
 
 .background_image {
     display: flex;
@@ -87,4 +95,16 @@ main {
 .arrow_down i:hover {
     color: #ff0000;
     font-size: 2em;
+}
+
+.featured{
+    height: calc(100vh - 200px);
+}
+
+.featured h1{
+    color: #ffffff;
+    font-size: 45px;
+    font-weight: 200;
+    padding: 0;
+    margin: 0;
 }
