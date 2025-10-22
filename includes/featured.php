@@ -50,7 +50,7 @@ switch (strtolower($featured['page'])) {
         <p><?= htmlspecialchars($featured['featured_desc']) ?></p>
         <div class="center_container">
             <a href="<?= $targetPage ?>?article=<?= urlencode($featured['titre']) ?>" class="btn_featured">
-                Voir <?= htmlspecialchars($featured['page']) ?>
+                SEE MORE...
             </a>
         </div>
     </div>
