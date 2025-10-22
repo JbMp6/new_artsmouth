@@ -31,5 +31,16 @@
         "featured_image": "",
         "page": "crush",
         "video": ""
+    },
+    {
+        "id": 4,
+        "date": "2025-10-10",
+        "titre": "My Blue Weekend \/ A Year Later",
+        "desc": "Time : 03:24\\n\r\nShort Film by Artsmouth [2023]",
+        "featured_desc": "",
+        "image_bgrd": "admin\/uploads\/video_myblueweekend.jpg",
+        "featured_image": "",
+        "page": "video",
+        "video": "https:\/\/player.vimeo.com\/video\/881194415?h=8973329de7"
     }
 ]

@@ -21,7 +21,7 @@ usort($crushArticles, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']
     <title>Crush</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/slider_crush.css">
-    <script src="assets/crush_slider.js"></script>
+    <script src="assets/dots_slider.js"></script>
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
