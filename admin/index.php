@@ -1,17 +1,33 @@
 <?php
 session_start();
+
+// Hash du mot de passe "ArtsmouthAdmin1"
+$hashedPassword = '$2y$10$PqFpZ1UXsmqUZTqjNzSjlOu8x9h8SeiD6x5nX.3t9PLITRqaC0dFy'; // généré avec password_hash('ArtsmouthAdmin1', PASSWORD_DEFAULT);
+
 $errors = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user = $_POST['user'] ?? '';
-    $pass = $_POST['pass'] ?? '';
+// Génération du token CSRF si inexistant
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
-    // Vérification simple du login
-    if ($user === 'admin' && $pass === '1234') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $user = htmlspecialchars(trim($_POST['user'] ?? ''));
+    $pass = trim($_POST['pass'] ?? '');
+    $csrf = $_POST['csrf_token'] ?? '';
+
+    // Vérification du token CSRF
+    if ($csrf !== $_SESSION['csrf_token']) {
+        $errors[] = "Formulaire invalide.";
+    }
+
+    // Vérification du login
+    if (empty($errors) && $user === 'artsmouth' && password_verify($pass, $hashedPassword)) {
+        session_regenerate_id(true); // sécurise la session
         $_SESSION['admin'] = true;
-        header('Location: dashboard.php'); // redirection vers la page admin
+        header('Location: dashboard.php');
         exit;
-    } else {
+    } else if (empty($errors)) {
         $errors[] = "Utilisateur ou mot de passe incorrect";
     }
 }
@@ -23,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <title>Login Admin</title>
     <style>
-        /* Corps de la page */
         body {
             margin: 0;
             padding: 0;
@@ -35,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: 100vh;
         }
 
-        /* Conteneur principal du formulaire */
         .form-container {
             background: rgba(0, 0, 0, 0.7);
             padding: 50px 40px;
@@ -47,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
         }
 
-        /* Titre du formulaire */
         form h1 {
             color: #ffffff;
             font-size: 36px;
@@ -56,14 +69,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             text-align: center;
         }
 
-        /* Messages d'erreur */
         form p {
             color: #ff4d4d;
             font-size: 14px;
             margin-bottom: 15px;
         }
 
-        /* Styles des champs */
         form input {
             width: 100%;
             background: transparent;
@@ -82,12 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 0 5px #ff0000;
         }
 
-        /* Placeholder */
         form input::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Bouton */
         form button {
             width: 100%;
             background: #fff;
@@ -108,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transform: scale(1.05);
         }
 
-        /* Responsive */
         @media screen and (max-width: 450px) {
             .form-container {
                 width: 90%;
@@ -127,12 +135,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post">
             <h1>Login Admin</h1>
 
-            <?php 
-            foreach($errors as $e) {
-                echo "<p>$e</p>";
-            } 
-            ?>
+            <?php foreach($errors as $e) echo "<p>$e</p>"; ?>
 
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
             <input type="text" name="user" placeholder="Utilisateur" required>
             <input type="password" name="pass" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>

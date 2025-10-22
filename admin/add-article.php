@@ -50,25 +50,154 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<h1>Ajouter un article</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un article</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-<?php foreach($errors as $e) echo "<p style='color:red'>$e</p>"; ?>
-<?php if($success) echo "<p style='color:green'>Article ajouté avec succès !</p>"; ?>
+        .form-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 50px 40px;
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-<form method="post">
-    <input type="text" name="titre" placeholder="Titre">
-    <input type="date" name="date" value="<?= date('Y-m-d') ?>">
-    <textarea name="desc" placeholder="Description"></textarea>
-    <textarea name="featured_desc" placeholder="Featured Description"></textarea>
-    <input type="text" name="image_bgrd" placeholder="Image de fond (ex: admin/uploads/bg.jpg)">
-    <input type="text" name="featured_image" placeholder="Featured image (ex: admin/uploads/featured.jpg)">
-    <select name="page">
-        <option value="">-- Choisir une page --</option>
-        <option value="work">Work</option>
-        <option value="crush">Crush</option>
-        <option value="video">Video</option>
-        <option value="featured">Only Featured</option>
-    </select>
-    <input type="text" name="video" placeholder="Vidéo (facultatif)">
-    <button type="submit">Créer</button>
-</form>
+        h1 {
+            color: #ffffff;
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #ff4d4d;
+        }
+
+        .success {
+            color: #00ff00;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: transparent;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            resize: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 150px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            line-height: normal;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 5px #ff0000;
+        }
+
+        ::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            width: 100%;
+            background: #fff;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff0000;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        @media screen and (max-width: 450px) {
+            .form-container {
+                width: 90%;
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Ajouter un article</h1>
+
+        <?php foreach($errors as $e) echo "<p class='error'>$e</p>"; ?>
+        <?php if($success) echo "<p class='success'>Article ajouté avec succès !</p>"; ?>
+
+        <form method="post">
+            <input type="text" name="titre" placeholder="Titre" required>
+            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required>
+            <textarea name="desc" placeholder="Description"></textarea>
+            <textarea name="featured_desc" placeholder="Featured Description"></textarea>
+            <input type="text" name="image_bgrd" placeholder="Image de fond (ex: admin/uploads/bg.jpg)" required>
+            <input type="text" name="featured_image" placeholder="Featured image (ex: admin/uploads/featured.jpg)">
+            <select name="page" required>
+                <option value="">-- Choisir une page --</option>
+                <option value="work">Work</option>
+                <option value="crush">Crush</option>
+                <option value="video">Video</option>
+                <option value="featured">Only Featured</option>
+            </select>
+            <input type="text" name="video" placeholder="Vidéo (facultatif)">
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+</body>
+</html>
