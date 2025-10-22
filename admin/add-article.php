@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <option value="work">Work</option>
         <option value="crush">Crush</option>
         <option value="video">Video</option>
-        <option value="video">Only Featured</option>
+        <option value="featured">Only Featured</option>
     </select>
     <input type="text" name="video" placeholder="Vidéo (facultatif)">
     <button type="submit">Créer</button>

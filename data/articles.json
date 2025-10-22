@@ -7,6 +7,17 @@
         "featured_desc": "Artsmouth cr\u00e9e le logo et la mascotte du HBC Briec : une panth\u00e8re rose \u00e9l\u00e9gante et malicieuse. Clin d\u2019\u0153il \u00e0 Friz Freleng, elle incarne une \u00e9quipe vive, impr\u00e9visible\u2026 et toujours avec un coup d\u2019avance !",
         "image_bgrd": "admin\/",
         "featured_image": "admin\/uploads\/vignette_hbc_briec.jpg",
+        "page": "featured",
+        "video": ""
+    },
+    {
+        "id": 2,
+        "date": "2025-10-15",
+        "titre": "MosaiK \/ Basic Foundation",
+        "desc": "Illustration by Artsmouth\n[2014]",
+        "featured_desc": "",
+        "image_bgrd": "admin\/uploads\/work_mosaik.jpg",
+        "featured_image": "",
         "page": "work",
         "video": ""
     }
