@@ -14,19 +14,50 @@ if(file_exists($jsonFile)) {
     $articles = json_decode(file_get_contents($jsonFile), true);
 }
 
+$uploadDir = 'admin/uploads/';
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0755, true);
+}
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre'] ?? '');
     $desc = trim($_POST['desc'] ?? '');
     $featured_desc = trim($_POST['featured_desc'] ?? '');
-    $image_bgrd = trim($_POST['image_bgrd'] ?? '');
-    $featured_image = trim($_POST['featured_image'] ?? '');
     $page = trim($_POST['page'] ?? '');
     $video = trim($_POST['video'] ?? '');
     $date = $_POST['date'] ?? date('Y-m-d');
 
+    // Validation des champs obligatoires
     if(!$titre) $errors[] = "Le titre est obligatoire";
     if(!$page) $errors[] = "La page est obligatoire";
-    if(!$image_bgrd) $errors[] = "L'image de fond est obligatoire";
+
+    // Gestion de l'upload de l'image de fond
+    $image_bgrd = '';
+    if(isset($_FILES['image_bgrd']) && $_FILES['image_bgrd']['error'] === UPLOAD_ERR_OK) {
+        $tmpName = $_FILES['image_bgrd']['tmp_name'];
+        $fileName = uniqid() . '_' . basename($_FILES['image_bgrd']['name']);
+        $targetFile = $uploadDir . $fileName;
+        if(move_uploaded_file($tmpName, $targetFile)) {
+            $image_bgrd = $targetFile;
+        } else {
+            $errors[] = "Erreur lors de l'upload de l'image de fond";
+        }
+    } else {
+        $errors[] = "L'image de fond est obligatoire";
+    }
+
+    // Gestion de l'upload de l'image featured
+    $featured_image = '';
+    if(isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
+        $tmpName = $_FILES['featured_image']['tmp_name'];
+        $fileName = uniqid() . '_' . basename($_FILES['featured_image']['name']);
+        $targetFile = $uploadDir . $fileName;
+        if(move_uploaded_file($tmpName, $targetFile)) {
+            $featured_image = $targetFile;
+        } else {
+            $errors[] = "Erreur lors de l'upload de l'image featured";
+        }
+    }
 
     if(empty($errors)) {
         $id = count($articles) ? max(array_column($articles, 'id')) + 1 : 1;
@@ -181,13 +212,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php foreach($errors as $e) echo "<p class='error'>$e</p>"; ?>
         <?php if($success) echo "<p class='success'>Article ajouté avec succès !</p>"; ?>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <input type="text" name="titre" placeholder="Titre" required>
             <input type="date" name="date" value="<?= date('Y-m-d') ?>" required>
             <textarea name="desc" placeholder="Description"></textarea>
             <textarea name="featured_desc" placeholder="Featured Description"></textarea>
-            <input type="text" name="image_bgrd" placeholder="Image de fond (ex: admin/uploads/bg.jpg)" required>
-            <input type="text" name="featured_image" placeholder="Featured image (ex: admin/uploads/featured.jpg)">
+            <input type="file" name="image_bgrd" accept="image/*" required>
+            <input type="file" name="featured_image" accept="image/*">
             <select name="page" required>
                 <option value="">-- Choisir une page --</option>
                 <option value="work">Work</option>
