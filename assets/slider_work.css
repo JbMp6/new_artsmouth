@@ -1,21 +1,28 @@
 .work-slider {
-  display: flex;
+  position: relative; /* conteneur relatif pour empiler les slides */
   width: 100%;
-  height: 700px;
+  height: 700px; /* hauteur fixe, ou adapter à ta vidéo/image */
   overflow: hidden;
   background: #000;
 }
 
 .slider-container {
+  position: relative; /* nécessaire pour les slides absolues */
   width: 100%;
-  height: 700px;
+  height: 100%;
 }
 
+/* Slides empilées */
 .slide {
+  position: absolute; /* empile toutes les slides */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* prend toute la hauteur du conteneur */
   display: flex;
   flex-direction: column;
-  height: 700px;
-  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
   background-size: cover;
   background-position: center;
   opacity: 0;
@@ -28,14 +35,23 @@
   z-index: 2;
 }
 
+/* Overlay pour centrer dots et contenu */
+.overlay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
 
-/* Les dots maintenant centrés dans l’overlay */
+/* Dots intégrés dans la slide */
 .slider-dots {
   display: flex;
   justify-content: center;
-  width: 50%;
   gap: 12px;
-  margin-top: 50px;
+  margin-top: 50px; /* 50px sous la vidéo/image */
 }
 
 .slider-dots .dot {
@@ -52,16 +68,17 @@
   transform: scale(1.3);
 }
 
-
-/* === Dots intégrés dans l'overlay === */
-.overlay {
+/* Contenu (logo + texte) */
+.content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: flex-start;
   justify-content: center;
+  margin-top: 80px; /* 80px sous les dots */
+  gap: 30px;
+  width: 100%;
 }
 
-/* Bloc logo + texte côte à côte */
 .static_logo {
   display: flex;
   align-items: center;
@@ -74,18 +91,10 @@
 
 .slide-content {
   color: #fff;
-  text-align: center;
-  max-width: 600px;
   display: flex;
-  justify-content: end;
   flex-direction: column;
+  max-width: 600px;
   text-align: left;
-}
-
-.content{
-    display: flex;
-    flex-direction: row;
-    margin-top: 50px;
 }
 
 .slide-content h2 {
@@ -96,6 +105,6 @@
 
 .slide-content p {
   font-size: 12px;
-  margin: 0;
+  margin: 5px 0 0 0;
   padding: 0;
 }

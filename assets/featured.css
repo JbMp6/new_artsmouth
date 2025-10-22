@@ -31,10 +31,26 @@
 
 .featured_content p{
     color: #ffffff;
-    margin: 0 0 150px 0;
+    margin: 0 0 40px 0;
     font-size: 17.5px;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0px;
     word-spacing: 0px;
+}
+
+.btn_featured {
+  display: inline-block;
+  margin-bottom: 110px;
+  padding: 12px 24px;
+  background: #ffffff;
+  color: #000000;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn_featured:hover {
+  background: #ff0000;
 }

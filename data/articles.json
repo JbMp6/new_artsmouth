@@ -3,12 +3,12 @@
         "id": 1,
         "date": "2025-10-21",
         "titre": "HBC BRIEC \/ TOUJOURS EN ROSE",
-        "desc": "HBC",
+        "desc": "Time : 01:10\nMotion Design by Artsmouth [2025]",
         "featured_desc": "Artsmouth cr\u00e9e le logo et la mascotte du HBC Briec : une panth\u00e8re rose \u00e9l\u00e9gante et malicieuse. Clin d\u2019\u0153il \u00e0 Friz Freleng, elle incarne une \u00e9quipe vive, impr\u00e9visible\u2026 et toujours avec un coup d\u2019avance !",
-        "image_bgrd": "admin\/",
+        "image_bgrd": "admin\/uploads\/video_hbcbriec.jpg",
         "featured_image": "admin\/uploads\/vignette_hbc_briec.jpg",
-        "page": "featured",
-        "video": ""
+        "page": "video",
+        "video": "https:\/\/player.vimeo.com\/video\/1124559992"
     },
     {
         "id": 2,
@@ -36,11 +36,22 @@
         "id": 4,
         "date": "2025-10-10",
         "titre": "My Blue Weekend \/ A Year Later",
-        "desc": "Time : 03:24\\n\r\nShort Film by Artsmouth [2023]",
+        "desc": "Time : 03:24\nShort Film by Artsmouth [2023]",
         "featured_desc": "",
         "image_bgrd": "admin\/uploads\/video_myblueweekend.jpg",
         "featured_image": "",
         "page": "video",
         "video": "https:\/\/player.vimeo.com\/video\/881194415?h=8973329de7"
+    },
+    {
+        "id": 5,
+        "date": "2025-10-10",
+        "titre": "Valmeinier",
+        "desc": "Photo by Artsmouth\\n\r\n[2015]",
+        "featured_desc": "",
+        "image_bgrd": "admin\/uploads\/crush_valmeinier.jpg",
+        "featured_image": "",
+        "page": "crush",
+        "video": ""
     }
 ]

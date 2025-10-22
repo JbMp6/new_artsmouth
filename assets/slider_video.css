@@ -1,22 +1,28 @@
-/* Slider Video */
 .video-slider {
-  display: flex;
+  position: relative;
   width: 100%;
-  height: 700px;
   overflow: hidden;
   background: #000;
 }
 
+/* Le conteneur du slider garde une hauteur fixe */
 .slider-container {
+  position: relative;
   width: 100%;
-  height: 700px;
+  height: 700px; /* ou 400px si tu veux la hauteur de ta vidéo */
 }
 
+/* Les slides sont empilées mais visibles en fondu */
 .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* chaque slide prend toute la hauteur du conteneur */
   display: flex;
   flex-direction: column;
-  height: 700px;
-  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
   background-size: cover;
   background-position: center;
   opacity: 0;
@@ -29,13 +35,21 @@
   z-index: 2;
 }
 
-/* Les dots maintenant centrés dans l’overlay */
+/* Bloc vidéo centré */
+.full_container iframe {
+  display: block;
+  margin: 0 auto;
+  width: 712px;
+  height: 400px;
+}
+
+/* Dots : 50px sous la vidéo */
 .slider-dots {
   display: flex;
   justify-content: center;
-  width: 50%;
   gap: 12px;
   margin-top: 50px;
+  z-index: 5;
 }
 
 .slider-dots .dot {
@@ -52,19 +66,14 @@
   transform: scale(1.3);
 }
 
-/* === Dots intégrés dans l'overlay === */
-.overlay {
+/* Contenu : 80px plus bas */
+.content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
-}
-
-/* Bloc logo + texte côte à côte */
-.static_logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  margin-top: 80px;
+  gap: 30px;
 }
 
 .static_logo img {
@@ -73,18 +82,10 @@
 
 .slide-content {
   color: #fff;
-  text-align: center;
-  max-width: 600px;
   display: flex;
-  justify-content: end;
   flex-direction: column;
+  max-width: 600px;
   text-align: left;
-}
-
-.content{
-  display: flex;
-  flex-direction: row;
-  margin-top: 50px;
 }
 
 .slide-content h2 {
@@ -95,6 +96,6 @@
 
 .slide-content p {
   font-size: 12px;
-  margin: 0;
+  margin: 5px 0 0 0;
   padding: 0;
 }

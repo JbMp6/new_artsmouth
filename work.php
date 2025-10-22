@@ -12,6 +12,21 @@ $workArticles = array_filter($articles, fn($a) => strtolower($a['page']) === 'wo
 
 // Trier par date décroissante
 usort($workArticles, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']));
+
+// Vérifier si un article est demandé
+$targetArticle = isset($_GET['article']) ? strtolower($_GET['article']) : null;
+
+// Trouver l'index de la slide correspondante (si slider existe)
+$targetIndex = 0;
+if ($targetArticle) {
+    foreach ($articlesSlider as $i => $a) { // $articlesSlider = tableau des articles pour le slider
+        if (strtolower($a['titre']) === $targetArticle) {
+            $targetIndex = $i;
+            break;
+        }
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,6 +37,7 @@ usort($workArticles, fn($a, $b) => strtotime($b['date']) - strtotime($a['date'])
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/slider_work.css">
     <script src="assets/dots_slider.js"></script>
+
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
