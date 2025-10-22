@@ -2,7 +2,7 @@
 session_start();
 
 // Hash du mot de passe "ArtsmouthAdmin1"
-$hashedPassword = '$2y$10$PqFpZ1UXsmqUZTqjNzSjlOu8x9h8SeiD6x5nX.3t9PLITRqaC0dFy'; // généré avec password_hash('ArtsmouthAdmin1', PASSWORD_DEFAULT);
+$hashedPassword = '$2y$10$2NR.aiu2YTpimYlmVgFMOO.79/c0gvGAhp2zUa0IV69UzRVIg8ziC'; // généré avec password_hash('ArtsmouthAdmin1', PASSWORD_DEFAULT);
 
 $errors = [];
 
