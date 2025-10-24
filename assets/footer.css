@@ -38,6 +38,7 @@ footer p {
     color: #ffffff;
     font-size: 32px;
     text-decoration: none;
+    transition: all 0.3s ease;
 }
 
 .footer_icons a:hover {

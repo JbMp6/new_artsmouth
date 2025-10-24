@@ -88,24 +88,28 @@ main {
     text-align: justify;
 }
 
-.arrow_down i{
-    color: #ffffff;
-    font-size: 2em;
+/* Styles pour les SVG des flèches */
+.arrow-svg {
+    width: 100px;
+    height: auto;
+    fill: #ffffff;
+    transition: all 0.3s ease;
 }
 
-.arrow_down i:hover {
-    color: #ff0000;
-    font-size: 2em;
+.arrow-svg:hover {
+    fill: #ff0000;
 }
 
-.up{
-    rotate: 180deg;
+/* Rotation pour la flèche vers le haut */
+.arrow-svg.up {
+    transform: rotate(180deg);
 }
+
 
 .h1_featured{
     color: #ffffff;
     font-size: 45px;
-    font-weight: 200;
+    font-weight: 100;
     padding: 0;
     margin: 150px 0 50px 0;
 
@@ -165,23 +169,22 @@ form textarea::placeholder {
 
 /* Bouton */
 form button {
+  font-family: Arial, Helvetica, sans-serif;  
   width: 100%;
-  background: #fff;
-  color: #000;
+  background: #ffffff;
+  color: #000000;
   font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  padding: 12px;
+  font-size: 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s;
 }
 
 form button:hover {
-  background: #ccc;
-  transform: scale(1.02);
-  background-color: #ff0000;
+  background: #ff0000;
 }
 
 

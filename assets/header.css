@@ -45,6 +45,7 @@ nav {
     line-height: 2em;
     letter-spacing: 0px;
     margin: 0px 25px 0px 25px;
+    transition: all 0.3s ease;
 }
 
 .menu li a:hover {

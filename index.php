@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artsmouth</title>
     <link rel="stylesheet" href="assets/style.css">
+    <script src="assets/script.js"></script>
     <script src="https://kit.fontawesome.com/154242561e.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
     <div id="home"></div>
     <main id="home">
-        <div class="full_container center_container" style="height: 1000px">
+        <div class="full_container" style="height: 1000px">
             <div class="full_container center_container" style= "height: 600px">
                 <?php include __DIR__ . '/includes/home_slider.php'; ?>
             </div>
@@ -24,7 +25,10 @@
             </div>
             <div class="fluid_full_container center_container" style="height: 150px; width: 750px;">
                 <a class="arrow_down" href="#featured">
-                    <i class="fa-solid fa-angles-down"></i>
+                    <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <path d="M26.32,28.52c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.23c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.39,20.54c-.86.76-2.14.76-3,0l-23.38-20.54c-.94-.83-1.04-2.27-.21-3.21.44-.51,1.08-.77,1.71-.77Z"/>
+                        <path d="M26.32,42.13c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.22c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.38,20.55c-.86.76-2.14.76-3,0l-23.39-20.55c-.94-.83-1.04-2.27-.21-3.21.44-.52,1.08-.78,1.71-.78Z"/>
+                    </svg>
                 </a>
             </div>
         </div>
@@ -67,7 +71,10 @@
                     </p>
                 </div>
                 <a class="arrow_down up" href="#home">
-                    <i class="fa-solid fa-angles-down"></i>
+                    <svg class="arrow-svg up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <path d="M26.32,28.52c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.23c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.39,20.54c-.86.76-2.14.76-3,0l-23.38-20.54c-.94-.83-1.04-2.27-.21-3.21.44-.51,1.08-.77,1.71-.77Z"/>
+                        <path d="M26.32,42.13c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.22c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.38,20.55c-.86.76-2.14.76-3,0l-23.39-20.55c-.94-.83-1.04-2.27-.21-3.21.44-.52,1.08-.78,1.71-.78Z"/>
+                    </svg>
                 </a>
             </div>
             
