@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/style.css">
     <script src="assets/script.js"></script>
     <script src="https://kit.fontawesome.com/154242561e.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
