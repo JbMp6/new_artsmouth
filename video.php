@@ -37,6 +37,7 @@ if ($targetArticle) {
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/slider_video.css">
     <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="assets/script.js"></script>
     <script src="assets/dots_slider.js"></script>
 
 </head>

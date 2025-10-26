@@ -98,13 +98,15 @@
 }
 
 .slide-content h2 {
-  font-size: 16px;
+  font-size: 18px;
   margin: 0;
   padding: 0;
+  font-weight: 400;
 }
 
 .slide-content p {
-  font-size: 12px;
-  margin: 5px 0 0 0;
+  font-size: 14px;
+  margin: 10px 0 0 0;
   padding: 0;
+  line-height: 1.5em;
 }

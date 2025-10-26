@@ -9,6 +9,8 @@ footer {
     height: 100px;
     padding: 0;
     z-index: 100;
+    /* Ne pas appliquer de translation */
+    transform: none !important;
 }
 
 footer p {
@@ -22,7 +24,7 @@ footer p {
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 0 20px 0 20px;
+    padding: 0 50px 0 50px;
 }
 
 .footer_icons {

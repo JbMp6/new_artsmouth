@@ -1,6 +1,20 @@
+/* Translation du contenu principal (main seulement) */
+main {
+    transition: transform 0.4s ease-in-out;
+}
+
+body.menu-open main {
+    transform: translateX(300px);
+}
+
+/* Empêcher le défilement quand le menu est ouvert */
+body.menu-open {
+    overflow: hidden;
+}
+
 header { 
     display: flex;
-    justify-content: center; /* centre le menu horizontalement */
+    justify-content: center;
     align-items: center;
     position: fixed;
     top: 0;
@@ -9,45 +23,117 @@ header {
     height: 100px;
     padding: 0;
     z-index: 100;
+    box-sizing: border-box;
+    /* Ne pas appliquer de translation */
+    transform: none !important;
 }
 
 .header_logo {
-    position: absolute; /* logo à gauche indépendant du menu */
-    left: 50px;         /* 50px du bord gauche */
+    position: absolute;
+    left: 50px;
     width: 270px;
     height: auto;
 }
 
-nav {
+/* Bouton hamburger */
+.hamburger {
     display: flex;
-    justify-content: center; /* centre le menu dans le header */
-    align-items: center;
-    width: 1000px;
-}
-
-.menu {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    margin: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
     padding: 0;
+    z-index: 101;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.menu li a {
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.hamburger.active {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Pas de transformation en croix - garder le burger */
+.hamburger.active span:nth-child(1) {
+    transform: none;
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 1;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: none;
+}
+
+/* Menu vertical */
+.vertical-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 99;
+    transition: left 0.4s ease-in-out;
+    display: flex;
+    align-items: center;
+    padding: 100px 0 50px 0;
+    box-sizing: border-box;
+    /* Ne pas appliquer de translation */
+    transform: none !important;
+}
+
+.vertical-menu.active {
+    left: 0;
+}
+
+.vertical-menu-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.vertical-menu-list li {
+    width: 100%;
+    margin: 20px 0;
+    padding: 0;
+    opacity: 1;
+    transform: none;
+}
+
+/* Pas d'animation de défilement des titres */
+.vertical-menu.active .vertical-menu-list li {
+    opacity: 1;
+    transform: none;
+}
+
+.vertical-menu-list li a {
     text-decoration: none;
     color: #ffffff;
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: 300;
     text-transform: uppercase;
-    line-height: 2em;
-    letter-spacing: 0px;
-    margin: 0px 25px 0px 25px;
+    display: block;
+    padding: 15px 50px;
     transition: all 0.3s ease;
+    text-align: left;
 }
 
-.menu li a:hover {
+.vertical-menu-list li a:hover {
     color: #ff0000;
 }

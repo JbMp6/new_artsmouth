@@ -1,3 +1,40 @@
+// Fonction pour gérer le menu hamburger
+function hamburgerMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const verticalMenu = document.getElementById('verticalMenu');
+    const body = document.body;
+    
+    if (hamburger && verticalMenu) {
+        hamburger.addEventListener('click', function() {
+            // Toggle les classes active
+            hamburger.classList.toggle('active');
+            verticalMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+        
+        // Fermer le menu quand on clique sur un lien
+        const menuLinks = verticalMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                verticalMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+            });
+        });
+        
+        // Fermer le menu en cliquant en dehors
+        document.addEventListener('click', function(event) {
+            if (!verticalMenu.contains(event.target) && !hamburger.contains(event.target)) {
+                if (verticalMenu.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    verticalMenu.classList.remove('active');
+                    body.classList.remove('menu-open');
+                }
+            }
+        });
+    }
+}
+
 // Fonction pour le défilement fluide vers les sections
 function smoothScroll() {
     // Sélectionner tous les liens d'ancrage (y compris ceux du header)
@@ -72,6 +109,7 @@ function handlePageLoadScroll() {
 
 // Initialiser les fonctions quand le DOM est chargé
 document.addEventListener('DOMContentLoaded', function() {
+    hamburgerMenu();
     smoothScroll();
     handlePageLoadScroll();
 });

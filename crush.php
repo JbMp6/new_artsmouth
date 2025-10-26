@@ -36,6 +36,7 @@ if ($targetArticle) {
     <title>Crush</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/slider_crush.css">
+    <script src="assets/script.js"></script>
     <script src="assets/dots_slider.js"></script>
 
 </head>

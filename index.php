@@ -17,8 +17,8 @@
             <div class="full_container center_container" style= "height: 600px">
                 <?php include __DIR__ . '/includes/home_slider.php'; ?>
             </div>
-            <div class="fluid_full_container center_container" style="height: 200px; width: 750px;">
-                <div class="ltl_container center_container home_text" style="height: 200px; width: 750px;">
+            <div class="fluid_full_container center_container" style="height: 200px; width: 700px;">
+                <div class="ltl_container center_container home_text" style="height: 200px; width: 100%;">
                     <p>
                         La découverte de la paire de défenses devint alors le point de départ d'une fabuleuse aventure. <b>Artsmouth est là,</b> un clin d'œil au mammouth Jarkov maintenu dans un bloc de permafrost, ce sol gelé en permanence qui est son linceul depuis plus de 20 000 ans… 
                     </p>
