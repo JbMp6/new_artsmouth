@@ -1,10 +1,12 @@
-/* Translation du contenu principal (main seulement) */
-main {
-    transition: transform 0.4s ease-in-out;
-}
+/* Le main ne bouge plus sur mobile car le menu est en overlay pleine page */
+@media (min-width: 1001px) {
+    main {
+        transition: transform 0.4s ease-in-out;
+    }
 
-body.menu-open main {
-    transform: translateX(300px);
+    body.menu-open main {
+        transform: translateX(300px);
+    }
 }
 
 /* Empêcher le défilement quand le menu est ouvert */
@@ -51,6 +53,7 @@ header {
     left: 50%;
     transform: translateX(-50%);
 }
+
 
 .hamburger span {
     display: block;
@@ -136,4 +139,59 @@ header {
 
 .vertical-menu-list li a:hover {
     color: #ff0000;
+}
+
+/* Toutes les styles mobile */
+@media (max-width: 1000px) {
+    /* Masquer le logo */
+    .header_logo {
+        display: none !important;
+    }
+    
+    /* Centrer le burger */
+    .hamburger {
+        position: absolute !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    .hamburger.active {
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+    }
+    
+    /* Menu en pleine page */
+    .vertical-menu {
+        left: -100%;
+        width: 100vw !important;
+        min-width: 100vw !important;
+        max-width: 100vw !important;
+        justify-content: center;
+    }
+    
+    .vertical-menu.active {
+        left: 0;
+    }
+    
+    /* Styles du menu vertical */
+    .vertical-menu-list {
+        text-align: center;
+        width: 100%;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .vertical-menu-list li {
+        width: 100%;
+        margin: 20px 0 !important;
+        padding: 0 !important;
+    }
+    
+    .vertical-menu-list li a {
+        text-align: center !important;
+        padding: 20px 20px !important;
+        font-size: 2em;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

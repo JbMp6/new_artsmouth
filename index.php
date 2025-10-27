@@ -49,10 +49,10 @@
                     <h1 class="h1_contact">/// CONTACT</h1>
                 </div>
                 <div class="form-container">
-                    <form>
-                        <input type="text" placeholder="Name" required>
-                        <input type="email" placeholder="Email" required>
-                        <textarea placeholder="Message" required></textarea>
+                    <form method="POST" action="contact-handler.php">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <textarea name="message" placeholder="Message" required></textarea>
                         <button type="submit">NOW ! GO TO ARTSMOUTH…</button>
                     </form>
                 </div>

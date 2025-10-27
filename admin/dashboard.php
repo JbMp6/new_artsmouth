@@ -92,6 +92,7 @@ if(!isset($_SESSION['admin'])) {
             <a href="add-article.php">Ajouter un article</a>
             <a href="delete-article.php">Supprimer un article</a>
             <a href="view.php">Visualiser les articles</a>
+            <a href="view-contact.php">Voir les messages de contact</a>
             <a href="logout.php">Déconnexion</a>
         </nav>
     </div>
