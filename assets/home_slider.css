@@ -55,10 +55,3 @@
   height: auto;
   margin-bottom: 100px;
 }
-
-/* === RESPONSIVE MOBILE === */
-@media (max-width: 1000px) {
-  .hero-slider {
-    display: none;
-  }
-}

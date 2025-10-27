@@ -1,14 +1,4 @@
-/* Desktop: menu latéral */
-@media (min-width: 1001px) {
-    main {
-      transition: transform 0.4s ease-in-out;
-    }
-    body.menu-open main {
-      transform: translateX(300px);
-    }
-  }
-  
-  body.menu-open {
+body.menu-open {
     overflow: hidden;
   }
   
@@ -53,7 +43,7 @@
     border-radius: 5px;
   }
   
-  .vertical-menu {
+.vertical-menu {
     position: fixed;
     top: 0;
     left: -300px;
@@ -95,27 +85,4 @@
   
   .vertical-menu-list li a:hover {
     color: #f00;
-  }
-  
-  /* Mobile: menu plein écran */
-  @media (max-width: 1000px) {
-    .header_logo {
-      display: none;
-    }
-    
-    .vertical-menu {
-      left: -100%;
-      width: 100%;
-      justify-content: center;
-    }
-    
-    .vertical-menu-list {
-      text-align: center;
-    }
-    
-    .vertical-menu-list li a {
-      text-align: center;
-      padding: 20px;
-      font-size: 2em;
-    }
   }

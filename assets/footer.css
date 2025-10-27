@@ -46,14 +46,3 @@ footer p {
 .footer_icons a:hover {
     color: #ff0000;
 }
-
-@media (max-width: 1000px) {
-    .footer_content p {
-        display: none;
-    }
-    .footer_content{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
