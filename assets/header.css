@@ -1,44 +1,36 @@
-/* Le main ne bouge plus sur mobile car le menu est en overlay pleine page */
+/* Desktop: menu latéral */
 @media (min-width: 1001px) {
     main {
-        transition: transform 0.4s ease-in-out;
+      transition: transform 0.4s ease-in-out;
     }
-
     body.menu-open main {
-        transform: translateX(300px);
+      transform: translateX(300px);
     }
-}
-
-/* Empêcher le défilement quand le menu est ouvert */
-body.menu-open {
+  }
+  
+  body.menu-open {
     overflow: hidden;
-}
-
-header { 
+  }
+  
+  header {
     display: flex;
     justify-content: center;
     align-items: center;
     position: fixed;
     top: 0;
-    background-color: #000000;
+    background-color: #000;
     width: 100%;
     height: 100px;
-    padding: 0;
     z-index: 100;
-    box-sizing: border-box;
-    /* Ne pas appliquer de translation */
-    transform: none !important;
-}
-
-.header_logo {
+  }
+  
+  .header_logo {
     position: absolute;
     left: 50px;
     width: 270px;
-    height: auto;
-}
-
-/* Bouton hamburger */
-.hamburger {
+  }
+  
+  .hamburger {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,146 +44,78 @@ header {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-}
-
-
-.hamburger span {
-    display: block;
+  }
+  
+  .hamburger span {
     width: 100%;
     height: 3px;
-    background-color: #ffffff;
-    transition: all 0.3s ease;
+    background-color: #fff;
     border-radius: 5px;
-}
-
-.hamburger.active {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* Pas de transformation en croix - garder le burger */
-.hamburger.active span:nth-child(1) {
-    transform: none;
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 1;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: none;
-}
-
-/* Menu vertical */
-.vertical-menu {
+  }
+  
+  .vertical-menu {
     position: fixed;
     top: 0;
     left: -300px;
     width: 300px;
     height: 100vh;
-    background-color: #000000;
+    background-color: #000;
     z-index: 99;
     transition: left 0.4s ease-in-out;
     display: flex;
     align-items: center;
-    padding: 100px 0 50px 0;
-    box-sizing: border-box;
-    /* Ne pas appliquer de translation */
-    transform: none !important;
-}
-
-.vertical-menu.active {
+    padding: 100px 0 50px;
+  }
+  
+  .vertical-menu.active {
     left: 0;
-}
-
-.vertical-menu-list {
-    list-style-type: none;
+  }
+  
+  .vertical-menu-list {
+    list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
-}
-
-.vertical-menu-list li {
-    width: 100%;
+  }
+  
+  .vertical-menu-list li {
     margin: 20px 0;
-    padding: 0;
-    opacity: 1;
-    transform: none;
-}
-
-/* Pas d'animation de défilement des titres */
-.vertical-menu.active .vertical-menu-list li {
-    opacity: 1;
-    transform: none;
-}
-
-.vertical-menu-list li a {
+  }
+  
+  .vertical-menu-list li a {
     text-decoration: none;
-    color: #ffffff;
+    color: #fff;
     font-size: 1.8em;
     font-weight: 300;
     text-transform: uppercase;
     display: block;
     padding: 15px 50px;
-    transition: all 0.3s ease;
-    text-align: left;
-}
-
-.vertical-menu-list li a:hover {
-    color: #ff0000;
-}
-
-/* Toutes les styles mobile */
-@media (max-width: 1000px) {
-    /* Masquer le logo */
+    transition: color 0.3s ease;
+  }
+  
+  .vertical-menu-list li a:hover {
+    color: #f00;
+  }
+  
+  /* Mobile: menu plein écran */
+  @media (max-width: 1000px) {
     .header_logo {
-        display: none !important;
+      display: none;
     }
     
-    /* Centrer le burger */
-    .hamburger {
-        position: absolute !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-    }
-    
-    .hamburger.active {
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-    }
-    
-    /* Menu en pleine page */
     .vertical-menu {
-        left: -100%;
-        width: 100vw !important;
-        min-width: 100vw !important;
-        max-width: 100vw !important;
-        justify-content: center;
+      left: -100%;
+      width: 100%;
+      justify-content: center;
     }
     
-    .vertical-menu.active {
-        left: 0;
-    }
-    
-    /* Styles du menu vertical */
     .vertical-menu-list {
-        text-align: center;
-        width: 100%;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    
-    .vertical-menu-list li {
-        width: 100%;
-        margin: 20px 0 !important;
-        padding: 0 !important;
+      text-align: center;
     }
     
     .vertical-menu-list li a {
-        text-align: center !important;
-        padding: 20px 20px !important;
-        font-size: 2em;
-        width: 100%;
-        box-sizing: border-box;
+      text-align: center;
+      padding: 20px;
+      font-size: 2em;
     }
-}
+  }
