@@ -5,18 +5,48 @@ if(!isset($_SESSION['admin'])) {
     exit;
 }
 
-$jsonFile = '../data/contacts.json';
+$jsonFile = dirname(__DIR__) . '/data/contacts.json';
 $messages = [];
+$successMessage = '';
 
 if(file_exists($jsonFile)) {
-    $messages = json_decode(file_get_contents($jsonFile), true);
+    $raw = file_get_contents($jsonFile);
+    $decoded = json_decode($raw, true);
+    $messages = is_array($decoded) ? $decoded : [];
+}
+
+// Suppression d'un message
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    $deleteId = $_POST['delete_id'];
+    $messages = array_filter($messages, fn($msg) => isset($msg['id']) && $msg['id'] !== $deleteId);
+
+    $updated = json_encode(array_values($messages), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    if ($updated !== false) {
+        $bytes = @file_put_contents($jsonFile, $updated, LOCK_EX);
+        if ($bytes === false) {
+            $successMessage = "Erreur: impossible d'enregistrer les modifications.";
+        } else {
+            $successMessage = "Message supprimé avec succès !";
+        }
+    } else {
+        $successMessage = "Erreur: encodage JSON invalide.";
+    }
+
+    // Recharger les messages après suppression
+    $reload = json_decode(@file_get_contents($jsonFile), true);
+    $messages = is_array($reload) ? $reload : [];
 }
 ?>
 
 <link rel="stylesheet" href="index.css">
 
 <div class="form-container" style="width:80%; padding:30px 20px;">
-    <h1>Liste des messages de contact</h1>
+    <a href="dashboard.php" style="background:#333; color:#fff; padding:10px 20px; border-radius:5px; text-decoration:none; display:inline-block; margin-bottom:20px;">← Retour au dashboard</a>
+    <h1>Gestion des messages de contact</h1>
+    
+    <?php if($successMessage): ?>
+        <div style="background:#00ff00; color:#000; padding:10px; border-radius:5px; margin-bottom:20px; font-weight:bold;"><?= $successMessage ?></div>
+    <?php endif; ?>
 
     <?php if(empty($messages)): ?>
         <p>Aucun message trouvé.</p>
@@ -24,21 +54,28 @@ if(file_exists($jsonFile)) {
         <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse: collapse; color:#fff;">
             <thead>
                 <tr style="background:#222;">
-                    <th>ID</th>
-                    <th>Date</th>
-                    <th>Nom</th>
-                    <th>Email</th>
-                    <th>Message</th>
+                    <th class="id">ID</th>
+                    <th class="date">Date</th>
+                    <th class="name">Nom</th>
+                    <th class="email">Email</th>
+                    <th class="message">Message</th>
+                    <th class="actions">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach($messages as $msg): ?>
                     <tr style="background:#333; text-align:center;">
-                        <td><?= htmlspecialchars($msg['id']) ?></td>
-                        <td><?= htmlspecialchars($msg['date']) ?></td>
-                        <td><?= htmlspecialchars($msg['name']) ?></td>
-                        <td><?= htmlspecialchars($msg['email']) ?></td>
-                        <td style="text-align:left;"><?= nl2br(htmlspecialchars($msg['message'])) ?></td>
+                        <td class="id"><?= htmlspecialchars($msg['id']) ?></td>
+                        <td class="date"><?= htmlspecialchars($msg['date']) ?></td>
+                        <td class="name"><?= htmlspecialchars($msg['name']) ?></td>
+                        <td class="email"><?= htmlspecialchars($msg['email']) ?></td>
+                        <td class="message" style="text-align:left;"><?= nl2br(htmlspecialchars($msg['message'])) ?></td>
+                        <td class="actions">
+                            <form method="post" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce message ?');">
+                                <input type="hidden" name="delete_id" value="<?= $msg['id'] ?>">
+                                <button type="submit" style="background:#cc0000; color:#fff; padding:5px 10px; border:none; border-radius:3px; font-size:12px; cursor:pointer;">Supprimer</button>
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -53,6 +90,30 @@ if(file_exists($jsonFile)) {
         color: #fff;
         margin:0;
         padding:0;
+    }
+
+    .id {
+        width: 8%;
+    }
+
+    .date {
+        width: 12%;
+    }
+
+    .name {
+        width: 15%;
+    }
+
+    .email {
+        width: 20%;
+    }
+
+    .message {
+        width: 35%;
+    }
+
+    .actions {
+        width: 10%;
     }
 
     .form-container {

@@ -1,6 +1,5 @@
 <?php
 // Fichier pour traiter les messages de contact
-header('Content-Type: application/json; charset=utf-8');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -35,12 +34,17 @@ $contactMessage = [
     'message' => htmlspecialchars($message, ENT_QUOTES, 'UTF-8')
 ];
 
-// Chemin du fichier JSON
-$jsonFile = __DIR__ . '/data/contacts.json';
+// Chemin du fichier JSON (chemin absolu robuste)
+$dataDir = __DIR__ . '/data';
+$jsonFile = $dataDir . '/contacts.json';
 
 // Créer le répertoire s'il n'existe pas
-if (!file_exists(__DIR__ . '/data')) {
-    mkdir(__DIR__ . '/data', 0755, true);
+if (!is_dir($dataDir)) {
+    if (!mkdir($dataDir, 0775, true) && !is_dir($dataDir)) {
+        http_response_code(500);
+        echo json_encode(['error' => "Impossible de créer le répertoire des données"]);
+        exit;
+    }
 }
 
 // Lire les messages existants
@@ -53,8 +57,27 @@ if (file_exists($jsonFile)) {
 // Ajouter le nouveau message
 $messages[] = $contactMessage;
 
-// Sauvegarder dans le fichier JSON
-file_put_contents($jsonFile, json_encode($messages, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+// Sauvegarder dans le fichier JSON avec verrouillage et vérification d'erreur
+$jsonPayload = json_encode($messages, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+if ($jsonPayload === false) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Erreur d\'encodage JSON']);
+    exit;
+}
+
+// Vérifier la possibilité d'écriture
+if (file_exists($jsonFile) && !is_writable($jsonFile)) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Le fichier de données n\'est pas inscriptible']);
+    exit;
+}
+
+$bytes = @file_put_contents($jsonFile, $jsonPayload, LOCK_EX);
+if ($bytes === false) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Échec de l\'écriture des données']);
+    exit;
+}
 
 // Rediriger avec un message de succès
 header('Location: index.php#contact');

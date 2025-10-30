@@ -9,9 +9,28 @@ $errors = [];
 $success = false;
 $jsonFile = '../data/articles.json';
 $articles = [];
+$article = null;
+
+// Récupérer l'ID de l'article à modifier
+$articleId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if(file_exists($jsonFile)) {
     $articles = json_decode(file_get_contents($jsonFile), true);
+    
+    // Trouver l'article à modifier
+    foreach($articles as $key => $art) {
+        if($art['id'] == $articleId) {
+            $article = $art;
+            $articleIndex = $key;
+            break;
+        }
+    }
+}
+
+// Si l'article n'existe pas, rediriger
+if(!$article) {
+    header('Location: dashboard.php');
+    exit;
 }
 
 $uploadDir = 'admin/uploads/';
@@ -32,7 +51,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(!$page) $errors[] = "La page est obligatoire";
 
     // Gestion de l'upload de l'image de fond
-    $image_bgrd = '';
+    $image_bgrd = $article['image_bgrd']; // Garder l'image existante par défaut
     if(isset($_FILES['image_bgrd']) && $_FILES['image_bgrd']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['image_bgrd']['tmp_name'];
         $fileName = uniqid() . '_' . basename($_FILES['image_bgrd']['name']);
@@ -42,12 +61,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             $errors[] = "Erreur lors de l'upload de l'image de fond";
         }
-    } else {
-        $errors[] = "L'image de fond est obligatoire";
     }
 
     // Gestion de l'upload de l'image featured
-    $featured_image = '';
+    $featured_image = $article['featured_image']; // Garder l'image existante par défaut
     if(isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK) {
         $tmpName = $_FILES['featured_image']['tmp_name'];
         $fileName = uniqid() . '_' . basename($_FILES['featured_image']['name']);
@@ -60,10 +77,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if(empty($errors)) {
-        $id = count($articles) ? max(array_column($articles, 'id')) + 1 : 1;
-
-        $newArticle = [
-            'id' => $id,
+        // Mettre à jour l'article
+        $articles[$articleIndex] = [
+            'id' => $articleId,
             'date' => $date,
             'titre' => $titre,
             'desc' => $desc,
@@ -74,9 +90,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             'video' => $video
         ];
 
-        $articles[] = $newArticle;
         file_put_contents($jsonFile, json_encode($articles, JSON_PRETTY_PRINT));
         $success = true;
+        
+        // Mettre à jour l'article pour l'affichage
+        $article = $articles[$articleIndex];
     }
 }
 ?>
@@ -85,7 +103,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Ajouter un article</title>
+    <title>Modifier un article</title>
     <style>
         body {
             margin: 0;
@@ -154,11 +172,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         textarea {
             height: 150px;
         }
+        
         label {
             color: #fff;
             font-size: 14px;
             margin-bottom: 10px;
             display: block;
+            width: 100%;
         }
 
         select {
@@ -190,12 +210,65 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-top: 10px;
         }
 
         button:hover {
             background-color: #ff0000;
             color: #fff;
             transform: scale(1.05);
+        }
+
+        .back-btn {
+            background: #333;
+            color: #fff;
+            width: auto;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .back-btn:hover {
+            background: #555;
+            transform: scale(1.05);
+        }
+
+        .current-image {
+            color: #ccc;
+            font-size: 12px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #fff;
+            padding: 12px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         @media screen and (max-width: 450px) {
@@ -213,30 +286,67 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="form-container">
-        <h1>Ajouter un article</h1>
+        <a href="dashboard.php" class="back-btn">← Retour au dashboard</a>
+        <h1>Modifier l'article</h1>
 
         <?php foreach($errors as $e) echo "<p class='error'>$e</p>"; ?>
-        <?php if($success) echo "<p class='success'>Article ajouté avec succès !</p>"; ?>
+        <?php if($success) echo "<p class='success'>Article modifié avec succès !</p>"; ?>
 
         <form method="post" enctype="multipart/form-data">
-            <input type="text" name="titre" placeholder="Titre" required>
-            <input type="date" name="date" value="<?= date('Y-m-d') ?>" required>
-            <textarea name="desc" placeholder="Description"></textarea>
-            <textarea name="featured_desc" placeholder="Featured Description"></textarea>
+            <input type="text" name="titre" placeholder="Titre" value="<?= htmlspecialchars($article['titre']) ?>" required>
+            
+            <input type="date" name="date" value="<?= $article['date'] ?>" required>
+            
+            <textarea name="desc" placeholder="Description"><?= htmlspecialchars($article['desc']) ?></textarea>
+            
+            <textarea name="featured_desc" placeholder="Featured Description"><?= htmlspecialchars($article['featured_desc']) ?></textarea>
+            
             <label for="image_bgrd">Image de fond</label>
-            <input type="file" name="image_bgrd" accept="image/*" required>
+            <?php if($article['image_bgrd']): ?>
+                <div class="current-image">Image actuelle: <?= basename($article['image_bgrd']) ?></div>
+            <?php endif; ?>
+            <div class="file-input-wrapper">
+                <input type="file" name="image_bgrd" accept="image/*" id="image_bgrd">
+                <label for="image_bgrd" class="file-input-label">Choisir une nouvelle image de fond</label>
+            </div>
+            
             <label for="featured_image">Image featured</label>
-            <input type="file" name="featured_image" accept="image/*">
+            <?php if($article['featured_image']): ?>
+                <div class="current-image">Image actuelle: <?= basename($article['featured_image']) ?></div>
+            <?php endif; ?>
+            <div class="file-input-wrapper">
+                <input type="file" name="featured_image" accept="image/*" id="featured_image">
+                <label for="featured_image" class="file-input-label">Choisir une nouvelle image featured</label>
+            </div>
+            
             <select name="page" required>
                 <option value="">-- Choisir une page --</option>
-                <option value="work">Work</option>
-                <option value="crush">Crush</option>
-                <option value="video">Video</option>
-                <option value="featured">Only Featured</option>
+                <option value="work" <?= $article['page'] == 'work' ? 'selected' : '' ?>>Work</option>
+                <option value="crush" <?= $article['page'] == 'crush' ? 'selected' : '' ?>>Crush</option>
+                <option value="video" <?= $article['page'] == 'video' ? 'selected' : '' ?>>Video</option>
+                <option value="featured" <?= $article['page'] == 'featured' ? 'selected' : '' ?>>Only Featured</option>
             </select>
-            <input type="text" name="video" placeholder="Vidéo (facultatif)">
-            <button type="submit">Créer</button>
+            
+            <input type="text" name="video" placeholder="Vidéo (facultatif)" value="<?= htmlspecialchars($article['video']) ?>">
+            
+            <button type="submit">Modifier l'article</button>
         </form>
     </div>
+
+    <script>
+        // Améliorer l'expérience utilisateur pour les uploads de fichiers
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const label = this.nextElementSibling;
+                if (this.files.length > 0) {
+                    label.textContent = 'Fichier sélectionné: ' + this.files[0].name;
+                    label.style.color = '#00ff00';
+                } else {
+                    label.textContent = label.textContent.replace(/Fichier sélectionné: .+/, 'Choisir un fichier');
+                    label.style.color = '#fff';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

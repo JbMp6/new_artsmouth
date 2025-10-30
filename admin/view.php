@@ -7,8 +7,19 @@ if(!isset($_SESSION['admin'])) {
 
 $jsonFile = '../data/articles.json';
 $articles = [];
+$successMessage = '';
 
 if(file_exists($jsonFile)) {
+    $articles = json_decode(file_get_contents($jsonFile), true);
+}
+
+// Suppression d'un article
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+    $deleteId = (int)$_POST['delete_id'];
+    $articles = array_filter($articles, fn($a) => $a['id'] !== $deleteId);
+    file_put_contents($jsonFile, json_encode(array_values($articles), JSON_PRETTY_PRINT));
+    $successMessage = "Article supprimé avec succès !";
+    // Recharger les articles après suppression
     $articles = json_decode(file_get_contents($jsonFile), true);
 }
 ?>
@@ -16,7 +27,12 @@ if(file_exists($jsonFile)) {
 <link rel="stylesheet" href="index.css">
 
 <div class="form-container" style="width:80%; padding:30px 20px;">
-    <h1>Liste des articles</h1>
+    <a href="dashboard.php" style="background:#333; color:#fff; padding:10px 20px; border-radius:5px; text-decoration:none; display:inline-block; margin-bottom:20px;">← Retour au dashboard</a>
+    <h1>Gestion des articles</h1>
+    
+    <?php if($successMessage): ?>
+        <div style="background:#00ff00; color:#000; padding:10px; border-radius:5px; margin-bottom:20px; font-weight:bold;"><?= $successMessage ?></div>
+    <?php endif; ?>
 
     <?php if(empty($articles)): ?>
         <p>Aucun article trouvé.</p>
@@ -33,6 +49,7 @@ if(file_exists($jsonFile)) {
                     <th>Featured Image</th>
                     <th>Page</th>
                     <th>Vidéo</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +75,13 @@ if(file_exists($jsonFile)) {
                             <?php if($a['video']): ?>
                                 <a href="<?= htmlspecialchars($a['video']) ?>" target="_blank">Voir vidéo</a>
                             <?php endif; ?>
+                        </td>
+                        <td>
+                            <a href="edit_article.php?id=<?= $a['id'] ?>" style="background:#ff0000; color:#fff; padding:5px 10px; border-radius:3px; text-decoration:none; font-size:12px; margin-right:5px;">Modifier</a>
+                            <form method="post" style="display:inline;" onsubmit="return confirm('Voulez-vous vraiment supprimer cet article ?');">
+                                <input type="hidden" name="delete_id" value="<?= $a['id'] ?>">
+                                <button type="submit" style="background:#cc0000; color:#fff; padding:5px 10px; border:none; border-radius:3px; font-size:12px; cursor:pointer;">Supprimer</button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach; ?>
