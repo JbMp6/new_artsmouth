@@ -35,6 +35,7 @@ if ($targetArticle) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work</title>
     <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style-mobile.css">
     <link rel="stylesheet" href="assets/slider_work.css">
     <script src="assets/script.js"></script>
     <script src="assets/dots_slider.js"></script>

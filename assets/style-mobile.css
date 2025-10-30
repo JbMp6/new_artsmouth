@@ -1,0 +1,27 @@
+html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+html, body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 1000px) {
+    footer p{
+        display: none;
+    }
+    footer .footer_content {
+        justify-content: center !important;
+        align-items: center !important;
+      }
+
+    /* Masquer le logo */
+    .header_logo {
+        display: none !important;
+    }
+
+}
+
