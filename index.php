@@ -41,7 +41,7 @@
             </div>
             <div class="fluid_full_container center_container" style="height: 150px; width: 100%;">
                 <a class="arrow_down" href="#featured">
-                    <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                    <svg class="arrow-svg arrow_mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                         <path d="M26.32,28.52c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.23c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.39,20.54c-.86.76-2.14.76-3,0l-23.38-20.54c-.94-.83-1.04-2.27-.21-3.21.44-.51,1.08-.77,1.71-.77Z"/>
                         <path d="M26.32,42.13c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.22c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.38,20.55c-.86.76-2.14.76-3,0l-23.39-20.55c-.94-.83-1.04-2.27-.21-3.21.44-.52,1.08-.78,1.71-.78Z"/>
                     </svg>
@@ -55,7 +55,7 @@
         </div>
 
 
-        <div class="full_container center_container" id="featured" style="height: 1000px">
+        <div class="full_container center_container" id="featured">
             <div class="background_image featured" style="background-image: url('assets/images/fond_enter_featured-scaled.jpg');">
                 <div class="h1_container ">
                     <h1 class="h1_featured">/// FEATURED</h1>
@@ -63,7 +63,7 @@
                 <?php include __DIR__ . '/includes/featured.php'; ?>
             </div>
         </div>
-        <div class="full_container center_container" id="contact" style="height: 1000px">
+        <div class="full_container center_container contact_mobile_container" id="contact">
             <div class="background_image featured" style="background-image: url('assets/images/fond_enter_contact-scaled.jpg');">
                 <div class="h1_container ">
                     <h1 class="h1_contact">/// CONTACT</h1>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="full_container center_container" id="why" style="height: 1000px">
+        <div class="full_container center_container" id="why">
             <div class="background_image featured" style="background-image: url('assets/images/fond_enter_citation-scaled.jpg');">
                 <div class="h1_container ">
                     <h1 class="h1_why">/// WHY?</h1>
@@ -91,8 +91,8 @@
                         Pierre Soulages
                     </p>
                 </div>
-                <a class="arrow_down up" href="#home">
-                    <svg class="arrow-svg up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <a class="arrow_down up " href="#home">
+                    <svg class="arrow-svg up arrow_mobile" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                         <path d="M26.32,28.52c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.23c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.39,20.54c-.86.76-2.14.76-3,0l-23.38-20.54c-.94-.83-1.04-2.27-.21-3.21.44-.51,1.08-.77,1.71-.77Z"/>
                         <path d="M26.32,42.13c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.22c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.38,20.55c-.86.76-2.14.76-3,0l-23.39-20.55c-.94-.83-1.04-2.27-.21-3.21.44-.52,1.08-.78,1.71-.78Z"/>
                     </svg>

@@ -42,6 +42,7 @@ switch (strtolower($featured['page'])) {
 }
 ?>
 <link rel="stylesheet" href="assets/featured.css">
+<link rel="stylesheet" href="assets/featured_mobile.css">
 
 <section class="full_container featured_article">
     <img src="<?= htmlspecialchars($featured['featured_image']) ?>" alt="<?= htmlspecialchars($featured['titre']) ?>">
