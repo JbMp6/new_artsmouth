@@ -9,5 +9,56 @@ html, body {
     overflow-x: hidden;
 }
 
+
+.mobile {
+    display: none;
+}
+
+
 @media (max-width: 1000px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile-home {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .background_image_mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 300px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 600px auto;
+        background-image: url('images/visu_phone-1.jpg');
+    }
+
+    .logo_mobile_home {
+        width: 70%;
+        max-width: 70%;
+        height: 250px;
+        object-fit: contain;
+    }
+
+    .home_text_mobile p {
+        font-family: 'Roboto', sans-serif;
+        font-size: 17.5px;
+        font-weight: 400;
+        text-transform: none;
+        font-style: normal;
+        text-decoration: none;
+        line-height: 24px;
+        letter-spacing: 0px;
+        word-spacing: 0px;
+        text-align: justify;
+        color: white;
+        margin: 30px 20px 0 20px;
+}
+    }
 }

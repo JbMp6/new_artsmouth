@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artsmouth</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/style-mobile.css">
     <script src="assets/script.js"></script>
     <script src="https://kit.fontawesome.com/154242561e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/style-mobile.css">
 
 </head>
 <body>
     <?php include __DIR__ . '/includes/header.php'; ?>
     <div id="home"></div>
-    <main id="home">
-        <div class="full_container" style="height: 1000px">
+    <main>
+        <div class="full_container desktop" style="height: 1000px">
             <div class="full_container center_container" style= "height: 600px">
                 <?php include __DIR__ . '/includes/home_slider.php'; ?>
             </div>
@@ -33,6 +33,25 @@
                     </svg>
                 </a>
             </div>
+        </div>
+
+        <div class="mobile mobile-home " style="height: 650px">
+            <div class="background_image_mobile">
+                <img src="assets/images/artsmouth_logo_textil.png" alt="logo artsmouth" class="logo_mobile_home">
+            </div>
+            <div class="fluid_full_container center_container" style="height: 150px; width: 100%;">
+                <a class="arrow_down" href="#featured">
+                    <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                        <path d="M26.32,28.52c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.23c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.39,20.54c-.86.76-2.14.76-3,0l-23.38-20.54c-.94-.83-1.04-2.27-.21-3.21.44-.51,1.08-.77,1.71-.77Z"/>
+                        <path d="M26.32,42.13c.53,0,1.07.19,1.5.57l21.88,19.22,21.89-19.22c.94-.83,2.38-.73,3.21.21.83.94.73,2.38-.21,3.21l-23.38,20.55c-.86.76-2.14.76-3,0l-23.39-20.55c-.94-.83-1.04-2.27-.21-3.21.44-.52,1.08-.78,1.71-.78Z"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="center_container home_text_mobile" style="height: auto; width: 100%;">
+                    <p>
+                        La découverte de la paire de défenses devint alors le point de départ d'une fabuleuse aventure. <b>Artsmouth est là,</b> un clin d'œil au mammouth Jarkov maintenu dans un bloc de permafrost, ce sol gelé en permanence qui est son linceul depuis plus de 20 000 ans… 
+                    </p>
+                </div>
         </div>
 
 
