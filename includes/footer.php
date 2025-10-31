@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="assets/footer.css">
+<link rel="stylesheet" href="assets/footer-mobile.css">
 <footer>
     <div class="footer_content">
         <p>&copy; <?php echo date('Y'); ?> Artsmouth. All rights reserved.</p>

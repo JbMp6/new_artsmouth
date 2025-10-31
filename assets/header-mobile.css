@@ -1,0 +1,77 @@
+html {
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+html, body {
+    overflow-x: hidden;
+}
+
+@media (max-width: 1000px) {
+    /* Masquer le logo */
+    .header_logo {
+        display: none !important;
+    }
+
+    /* Menu vertical */
+    .vertical-menu {
+        position: fixed;
+        top: 0;
+        left: -100vw;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        z-index: 99;
+        transition: left 0.4s ease-in-out;
+        padding: 100px 0 100px 0;
+        box-sizing: border-box;
+        /* Ne pas appliquer de translation */
+        transform: none !important;
+    }
+
+    .vertical-menu.active {
+        left: 0;
+    }
+
+    .vertical-menu-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .vertical-menu-list li {
+        width: 100%;
+        margin: 20px 0;
+        padding: 0;
+        opacity: 1;
+        transform: none;
+    }
+
+    /* Pas d'animation de défilement des titres */
+    .vertical-menu.active .vertical-menu-list li {
+        opacity: 1;
+        transform: none;
+    }
+
+    .vertical-menu-list li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 1.8em;
+        font-weight: 300;
+        text-transform: uppercase;
+        display: block;
+        padding: 5px 50px;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .vertical-menu-list li a:hover {
+        color: #ff0000;
+    }
+
+
+}
+

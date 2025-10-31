@@ -10,4 +10,11 @@ html, body {
 }
 
 @media (max-width: 1000px) {
+    footer p{
+        display: none;
+    }
+    footer .footer_content {
+        justify-content: center !important;
+        align-items: center !important;
+    }
 }
