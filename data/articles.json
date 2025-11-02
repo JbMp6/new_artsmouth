@@ -53,5 +53,38 @@
         "featured_image": "",
         "page": "crush",
         "video": ""
+    },
+    {
+        "id": 6,
+        "date": "2025-08-07",
+        "titre": "Handfull Experience",
+        "desc": "Objet Design by Artsmouth\n[1996]",
+        "featured_desc": "",
+        "image_bgrd": "admin\/uploads\/69073699d0f55_work_handfull.jpg",
+        "featured_image": "",
+        "page": "work",
+        "video": ""
+    },
+    {
+        "id": 7,
+        "date": "2025-06-05",
+        "titre": "Breizhone",
+        "desc": "Illustration by Artsmouth\n[1999]",
+        "featured_desc": "",
+        "image_bgrd": "admin\/uploads\/69073a7187396_work_breizhone.jpg",
+        "featured_image": "",
+        "page": "work",
+        "video": ""
+    },
+    {
+        "id": 8,
+        "date": "2025-06-05",
+        "titre": "Extravagant Pikant",
+        "desc": "Identity by Artsmouth\r\n[2014]",
+        "featured_desc": "",
+        "image_bgrd": "admin\/uploads\/69073f5ed5a1f_work_pikant.jpg",
+        "featured_image": "",
+        "page": "work",
+        "video": ""
     }
 ]

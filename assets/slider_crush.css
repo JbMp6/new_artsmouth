@@ -112,3 +112,7 @@
   line-height: 1.5em;
   padding: 0;
 }
+
+.crush_mobile{
+  display: none;
+}

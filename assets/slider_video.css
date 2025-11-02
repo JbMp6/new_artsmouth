@@ -101,3 +101,7 @@
   padding: 0;
   line-height: 1.5em;
 }
+
+.video_mobile{
+  display: none;
+}

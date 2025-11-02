@@ -37,6 +37,7 @@ if ($targetArticle) {
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/style-mobile.css">
     <link rel="stylesheet" href="assets/slider_video.css">
+    <link rel="stylesheet" href="assets/slider_video-mobile.css">
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="assets/script.js"></script>
     <script src="assets/dots_slider.js"></script>
@@ -84,6 +85,28 @@ if ($targetArticle) {
                     </div>
                     <?php endforeach; ?>
                 </div>
+            </section>
+            <section class="video_mobile">
+                <?php foreach ($videoArticles as $index => $article): ?>
+                    <div class="container_article">
+                        <div class="article" style="background-image: url('<?= htmlspecialchars($article['image_bgrd']) ?>')">
+                            <div class="video_container">
+                                <iframe title="vimeo-player" 
+                                        src="<?= htmlspecialchars($article['video']) ?>" 
+                                        frameborder="0" 
+                                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen>
+                                </iframe>
+                            </div>
+                            <div class="content_mobile">
+                                <h2><?= htmlspecialchars($article['titre']) ?></h2>
+                                <p><?= nl2br(htmlspecialchars($article['desc'])) ?></p>
+                            </div>
+                        </div>
+                        <div class="logo_container_mobile">
+                            <img src="assets/images/home_slider/logo.png" alt="Artsmouth Logo" class="logo_mobile_video">
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </section>
         </div>
     </main>

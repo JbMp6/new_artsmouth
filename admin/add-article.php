@@ -14,10 +14,13 @@ if(file_exists($jsonFile)) {
     $articles = json_decode(file_get_contents($jsonFile), true);
 }
 
-$uploadDir = 'admin/uploads/';
+// Utiliser le chemin absolu du dossier uploads dans admin
+$uploadDir = __DIR__ . '/uploads/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
+// Pour le JSON, on utilise le chemin relatif depuis la racine
+$uploadDirForJson = 'uploads/';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre'] ?? '');
@@ -38,7 +41,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileName = uniqid() . '_' . basename($_FILES['image_bgrd']['name']);
         $targetFile = $uploadDir . $fileName;
         if(move_uploaded_file($tmpName, $targetFile)) {
-            $image_bgrd = $targetFile;
+            // Utiliser le chemin relatif pour le JSON
+            $image_bgrd = $uploadDirForJson . $fileName;
         } else {
             $errors[] = "Erreur lors de l'upload de l'image de fond";
         }
@@ -53,10 +57,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileName = uniqid() . '_' . basename($_FILES['featured_image']['name']);
         $targetFile = $uploadDir . $fileName;
         if(move_uploaded_file($tmpName, $targetFile)) {
-            $featured_image = $targetFile;
+            // Utiliser le chemin relatif pour le JSON
+            $featured_image = $uploadDirForJson . $fileName;
         } else {
             $errors[] = "Erreur lors de l'upload de l'image featured";
         }
+    }
+    
+    // Ajouter 'admin/' au chemin des images pour le JSON
+    if(!empty($image_bgrd)) {
+        $image_bgrd_json = 'admin/' . $image_bgrd;
+    } else {
+        $image_bgrd_json = '';
+    }
+    if(!empty($featured_image)) {
+        $featured_image_json = 'admin/' . $featured_image;
+    } else {
+        $featured_image_json = '';
     }
 
     if(empty($errors)) {
@@ -68,8 +85,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             'titre' => $titre,
             'desc' => $desc,
             'featured_desc' => $featured_desc,
-            'image_bgrd' => $image_bgrd,
-            'featured_image' => $featured_image,
+            'image_bgrd' => $image_bgrd_json,
+            'featured_image' => $featured_image_json,
             'page' => $page,
             'video' => $video
         ];

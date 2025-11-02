@@ -33,10 +33,13 @@ if(!$article) {
     exit;
 }
 
-$uploadDir = 'admin/uploads/';
+// Utiliser le chemin absolu du dossier uploads dans admin
+$uploadDir = __DIR__ . '/uploads/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
+// Pour le JSON, on utilise le chemin relatif depuis la racine
+$uploadDirForJson = 'uploads/';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $titre = trim($_POST['titre'] ?? '');
@@ -57,7 +60,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileName = uniqid() . '_' . basename($_FILES['image_bgrd']['name']);
         $targetFile = $uploadDir . $fileName;
         if(move_uploaded_file($tmpName, $targetFile)) {
-            $image_bgrd = $targetFile;
+            // Utiliser le chemin relatif pour le JSON
+            $image_bgrd = $uploadDirForJson . $fileName;
         } else {
             $errors[] = "Erreur lors de l'upload de l'image de fond";
         }
@@ -70,10 +74,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fileName = uniqid() . '_' . basename($_FILES['featured_image']['name']);
         $targetFile = $uploadDir . $fileName;
         if(move_uploaded_file($tmpName, $targetFile)) {
-            $featured_image = $targetFile;
+            // Utiliser le chemin relatif pour le JSON
+            $featured_image = $uploadDirForJson . $fileName;
         } else {
             $errors[] = "Erreur lors de l'upload de l'image featured";
         }
+    }
+    
+    // Ajouter 'admin/' au chemin des nouvelles images pour le JSON
+    if(isset($_FILES['image_bgrd']) && $_FILES['image_bgrd']['error'] === UPLOAD_ERR_OK && !empty($image_bgrd) && strpos($image_bgrd, 'admin/') === false) {
+        $image_bgrd = 'admin/' . $image_bgrd;
+    }
+    if(isset($_FILES['featured_image']) && $_FILES['featured_image']['error'] === UPLOAD_ERR_OK && !empty($featured_image) && strpos($featured_image, 'admin/') === false) {
+        $featured_image = 'admin/' . $featured_image;
     }
 
     if(empty($errors)) {
