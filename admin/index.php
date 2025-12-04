@@ -35,44 +35,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin</title>
+    <link rel="stylesheet" href="../assets/style.css">
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
         
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
-        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #333);
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+            background-color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
         }
         
         .form-container {
-            background: rgba(0, 0, 0, 0.7);
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 50px 40px;
-            border-radius: 10px;
-            width: 400px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
         }
         
         form h1 {
             color: #ffffff;
-            font-size: 36px;
+            font-size: 45px;
             font-weight: 300;
             margin-bottom: 40px;
             text-align: center;
         }
         
         form p {
-            color: #ff4d4d;
+            color: #ff0000;
             font-size: 14px;
             margin-bottom: 15px;
             text-align: center;
@@ -84,18 +88,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: transparent;
             border: 1px solid #fff;
             color: #fff;
-            padding: 12px 15px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
             border-radius: 5px;
             outline: none;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        form input[type="text"]:focus,
-        form input[type="password"]:focus {
-            border-color: #ff0000;
-            box-shadow: 0 0 5px #ff0000;
+            font-size: 14px;
         }
         
         form input::placeholder {
@@ -104,23 +101,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         form button {
             width: 100%;
-            background: #fff;
-            color: #000;
+            background: #ffffff;
+            color: #000000;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             font-size: 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
         }
         
         form button:hover {
-            background-color: #ff0000;
-            color: #fff;
-            transform: scale(1.05);
+            background: #ff0000;
+            color: #ffffff;
         }
         
         @media screen and (max-width: 450px) {

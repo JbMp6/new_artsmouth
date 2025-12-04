@@ -48,6 +48,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $page = trim($_POST['page'] ?? '');
     $video = trim($_POST['video'] ?? '');
     $date = $_POST['date'] ?? date('Y-m-d');
+    $visible = isset($_POST['visible']) ? true : false;
 
     // Validation des champs obligatoires
     if(!$titre) $errors[] = "Le titre est obligatoire";
@@ -100,7 +101,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             'image_bgrd' => $image_bgrd,
             'featured_image' => $featured_image,
             'page' => $page,
-            'video' => $video
+            'video' => $video,
+            'visible' => $visible
         ];
 
         file_put_contents($jsonFile, json_encode($articles, JSON_PRETTY_PRINT));
@@ -117,12 +119,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Modifier un article</title>
+    <link rel="stylesheet" href="../assets/style.css">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #333);
+            font-family: "Roboto", sans-serif;
+            background-color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -130,19 +137,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .form-container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 50px 40px;
-            border-radius: 10px;
             width: 500px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 50px 40px;
         }
 
         h1 {
             color: #ffffff;
-            font-size: 36px;
+            font-size: 45px;
             font-weight: 300;
             margin-bottom: 40px;
         }
@@ -153,7 +157,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .error {
-            color: #ff4d4d;
+            color: #ff0000;
         }
 
         .success {
@@ -161,10 +165,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         form {
-            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100%;
         }
 
         input, textarea, select {
@@ -172,14 +176,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: transparent;
             border: 1px solid #fff;
             color: #fff;
-            padding: 12px 15px;
+            padding: 12px;
             margin-bottom: 15px;
             border-radius: 5px;
             outline: none;
-            font-size: 16px;
+            font-size: 14px;
             resize: none;
-            transition: all 0.3s ease;
             box-sizing: border-box;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
         }
 
         textarea {
@@ -202,50 +218,51 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             line-height: normal;
         }
 
-        input:focus, textarea:focus, select:focus {
-            border-color: #ff0000;
-            box-shadow: 0 0 5px #ff0000;
-        }
-
         ::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
 
         button {
             width: 100%;
-            background: #fff;
-            color: #000;
+            background: #ffffff;
+            color: #000000;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 12px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background 0.3s;
             margin-top: 10px;
         }
 
         button:hover {
-            background-color: #ff0000;
-            color: #fff;
-            transform: scale(1.05);
+            background: #ff0000;
+            color: #ffffff;
         }
 
-        .back-btn {
-            background: #333;
-            color: #fff;
-            width: auto;
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            text-decoration: none;
-            display: inline-block;
+        .back-link {
+            margin-top: 20px;
             text-align: center;
         }
 
-        .back-btn:hover {
-            background: #555;
-            transform: scale(1.05);
+        .back-link a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 14px;
+            background: #ffffff;
+            color: #000000;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.3s;
+            display: inline-block;
+        }
+
+        .back-link a:hover {
+            background: #ff0000;
+            color: #ffffff;
         }
 
         .current-image {
@@ -271,17 +288,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         .file-input-label {
             display: block;
-            background: rgba(255, 255, 255, 0.1);
+            background: transparent;
             border: 1px solid #fff;
-            padding: 12px 15px;
+            padding: 12px;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
             transition: all 0.3s ease;
+            color: #fff;
         }
 
         .file-input-label:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         @media screen and (max-width: 450px) {
@@ -299,7 +317,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <div class="form-container">
-        <a href="dashboard.php" class="back-btn">← Retour au dashboard</a>
         <h1>Modifier l'article</h1>
 
         <?php foreach($errors as $e) echo "<p class='error'>$e</p>"; ?>
@@ -342,8 +359,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <input type="text" name="video" placeholder="Vidéo (facultatif)" value="<?= htmlspecialchars($article['video']) ?>">
             
+            <div class="checkbox-wrapper">
+                <input type="checkbox" name="visible" id="visible" <?= (isset($article['visible']) && $article['visible']) ? 'checked' : '' ?>>
+                <label for="visible" style="margin-bottom: 0;">Article visible</label>
+            </div>
+            
             <button type="submit">Modifier l'article</button>
         </form>
+
+        <div class="back-link">
+            <a href="dashboard.php">← Retour au dashboard</a>
+        </div>
     </div>
 
     <script>

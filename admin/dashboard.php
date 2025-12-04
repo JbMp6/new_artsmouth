@@ -11,62 +11,65 @@ if(!isset($_SESSION['admin'])) {
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="../assets/style.css">
     <style>
-        /* Corps de la page */
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #333);
+            font-family: "Roboto", sans-serif;
+            background-color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
-        /* Conteneur principal */
         .dashboard-container {
-            background: rgba(0, 0, 0, 0.7);
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 50px 40px;
-            border-radius: 10px;
-            width: 400px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            text-align: center;
         }
 
         h1 {
             color: #ffffff;
-            font-size: 36px;
+            font-size: 45px;
             font-weight: 300;
             margin-bottom: 40px;
+            text-align: center;
         }
 
-        /* Boutons du dashboard */
         nav {
             display: flex;
-            flex-direction: column; /* empile verticalement */
-            gap: 15px; /* espace entre les boutons */
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
         }
 
         nav a {
             display: block;
-            padding: 12px 20px;
-            background: #fff;
-            color: #000;
-            text-decoration: none;
+            width: 100%;
+            background: #ffffff;
+            color: #000000;
             font-weight: bold;
-            border-radius: 5px;
-            transition: all 0.3s ease;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            padding: 12px 24px;
             text-align: center;
+            transition: background 0.3s;
         }
 
         nav a:hover {
-            background-color: #ff0000;
-            color: #fff;
-            transform: scale(1.05);
+            background: #ff0000;
+            color: #ffffff;
         }
 
-        /* Responsive */
         @media screen and (max-width: 450px) {
             .dashboard-container {
                 width: 90%;
@@ -76,11 +79,6 @@ if(!isset($_SESSION['admin'])) {
             h1 {
                 font-size: 28px;
                 margin-bottom: 30px;
-            }
-
-            nav a {
-                padding: 10px 15px;
-                font-size: 14px;
             }
         }
     </style>
@@ -92,6 +90,7 @@ if(!isset($_SESSION['admin'])) {
             <a href="add-article.php">Ajouter un article</a>
             <a href="view.php">Gérer les articles</a>
             <a href="view-contact.php">Voir les messages de contact</a>
+            <a href="manage-popup.php">Gérer le popup</a>
             <a href="logout.php">Déconnexion</a>
         </nav>
     </div>

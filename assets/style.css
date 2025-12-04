@@ -19,6 +19,23 @@ main {
     width: 100%;
     padding: 0;
     margin: 100px 0 100px 0;
+    position: relative;
+    z-index: 1; /* S'assurer que le main est en dessous du header */
+}
+
+.popup {
+  display: block;
+  opacity: 1;
+  transition: opacity 3s ease; /* transition de 0.5s avec easing */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000000000;
 }
 
 /* Types of containers */

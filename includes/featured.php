@@ -13,8 +13,8 @@ if (!$articles) {
     die("Impossible de lire les articles ou JSON vide");
 }
 
-// Filtrer les articles si nécessaire (ici tous)
-$articles_non_home = $articles;
+// Filtrer uniquement les articles visibles
+$articles_non_home = array_filter($articles, fn($a) => (isset($a['visible']) ? $a['visible'] : true));
 
 if (empty($articles_non_home)) {
     die("Aucun article à afficher");
@@ -38,7 +38,7 @@ switch (strtolower($featured['page'])) {
         $targetPage = 'crush.php';
         break;
     default:
-        $targetPage = 'video.php'; // fallback
+        $targetPage = 'index.php'; // fallback
 }
 ?>
 <link rel="stylesheet" href="assets/featured.css">
@@ -49,10 +49,12 @@ switch (strtolower($featured['page'])) {
     <div class="featured_content">
         <h2><?= htmlspecialchars($featured['titre']) ?></h2>
         <p><?= htmlspecialchars($featured['featured_desc']) ?></p>
-        <div class="center_container">
-            <a href="<?= $targetPage ?>?article=<?= urlencode($featured['titre']) ?>" class="btn_featured">
-                SEE MORE...
-            </a>
-        </div>
+        <?php if ($targetPage !== 'index.php'): ?>
+            <div class="center_container">
+                <a href="<?= $targetPage ?>?article=<?= urlencode($featured['titre']) ?>" class="btn_featured">
+                    SEE MORE...
+                </a>
+            </div>
+        <?php endif; ?>
     </div>
 </section>

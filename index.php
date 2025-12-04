@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artsmouth</title>
     <script src="assets/script.js"></script>
-    <script src="https://kit.fontawesome.com/154242561e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/style-mobile.css">
+    <link rel="icon" type="image/jpg" href="assets\images\favicon.jpg">
 
 </head>
 <body>
+    <div class="popup" style= "background-image: url(assets/images/popup.jpg)"></div>
     <?php include __DIR__ . '/includes/header.php'; ?>
     <div id="home"></div>
     <main>

@@ -52,16 +52,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Stop auto-slide si une vidéo démarre
-  const iframes = document.querySelectorAll('.slide iframe');
-  iframes.forEach(iframe => {
-    const player = new Vimeo.Player(iframe);
-    player.on('play', () => {
-      stopAutoSlide();
-      isAutoSliding = false;
-      console.log('Lecture vidéo détectée → slider arrêté');
+  // Stop auto-slide si une vidéo démarre (uniquement si l'API Vimeo est disponible)
+  if (typeof Vimeo !== 'undefined' && Vimeo.Player) {
+    const iframes = document.querySelectorAll('.slide iframe');
+    iframes.forEach(iframe => {
+      try {
+        const player = new Vimeo.Player(iframe);
+        player.on('play', () => {
+          stopAutoSlide();
+          isAutoSliding = false;
+          console.log('Lecture vidéo détectée → slider arrêté');
+        });
+      } catch (error) {
+        // Ignorer les erreurs si l'iframe n'est pas une vidéo Vimeo
+        console.log('Iframe non-Vimeo ignorée');
+      }
     });
-  });
+  }
 
   // Démarrage automatique
   startAutoSlide();

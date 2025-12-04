@@ -4,8 +4,14 @@ function hamburgerMenu() {
     const verticalMenu = document.getElementById('verticalMenu');
     const body = document.body;
     
+    console.log('Initialisation du menu hamburger...', { hamburger, verticalMenu });
+    
     if (hamburger && verticalMenu) {
-        hamburger.addEventListener('click', function() {
+        console.log('Éléments trouvés, ajout des event listeners...');
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Clic sur hamburger détecté!');
             // Toggle les classes active
             hamburger.classList.toggle('active');
             verticalMenu.classList.toggle('active');
@@ -107,12 +113,40 @@ function handlePageLoadScroll() {
     }
 }
 
+// Fonction d'initialisation
+function initScripts() {
+    try {
+        popUp();
+    } catch (error) {
+        console.log('Erreur popup:', error);
+    }
+    
+    try {
+        hamburgerMenu();
+    } catch (error) {
+        console.error('Erreur menu hamburger:', error);
+    }
+    
+    try {
+        smoothScroll();
+    } catch (error) {
+        console.log('Erreur smooth scroll:', error);
+    }
+    
+    try {
+        handlePageLoadScroll();
+    } catch (error) {
+        console.log('Erreur page load scroll:', error);
+    }
+}
+
 // Initialiser les fonctions quand le DOM est chargé
-document.addEventListener('DOMContentLoaded', function() {
-    hamburgerMenu();
-    smoothScroll();
-    handlePageLoadScroll();
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScripts);
+} else {
+    // Le DOM est déjà chargé, initialiser immédiatement
+    initScripts();
+}
 
 // Alternative avec une fonction plus avancée si le navigateur ne supporte pas 'smooth'
 function smoothScrollAdvanced() {
@@ -154,7 +188,53 @@ function smoothScrollAdvanced() {
     });
 }
 
-// Utiliser la version avancée si nécessaire
-// document.addEventListener('DOMContentLoaded', function() {
-//     smoothScrollAdvanced();
-// });
+function popUp() {
+    const popUp_page = document.querySelector(".popup");
+    
+    // Vérifier si la popup existe avant de la manipuler
+    if (!popUp_page) {
+        return;
+    }
+
+    // Vérifier si l'utilisateur a déjà vu le popup dans cette session
+    const hasSeenPopup = sessionStorage.getItem('artsmouth_popup_seen');
+    
+    // Si l'utilisateur a déjà vu le popup dans cette session, ne pas l'afficher
+    if (hasSeenPopup === 'true') {
+        popUp_page.style.display = "none";
+        return;
+    }
+
+    // Afficher la popup
+    popUp_page.style.display = "block";
+
+    // Petite pause pour que le navigateur applique display:block avant d'augmenter l'opacité
+    setTimeout(() => {
+        popUp_page.style.opacity = "1"; // fondu visible
+    }, 10);
+
+    // Bloquer le scroll
+    document.body.style.overflow = "hidden";
+
+    function preventScroll(e) {
+        e.preventDefault();
+    }
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+
+    // Après 3 secondes, cacher la popup avec fondu
+    setTimeout(() => {
+        popUp_page.style.opacity = "0"; // fondu vers invisible
+
+        // attendre la fin de la transition avant de mettre display:none
+        setTimeout(() => {
+            popUp_page.style.display = "none";
+            document.body.style.overflow = "auto";
+            window.removeEventListener("wheel", preventScroll);
+            window.removeEventListener("touchmove", preventScroll);
+            
+            // Enregistrer que l'utilisateur a vu le popup dans cette session
+            sessionStorage.setItem('artsmouth_popup_seen', 'true');
+        }, 3000); // correspond à la durée de la transition
+    }, 5000);
+}

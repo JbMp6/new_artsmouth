@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="assets/header.css">
 <link rel="stylesheet" href="assets/header-mobile.css">
 <header>
-    <img src="assets/images/artsmouth_logo_text.png" alt="Logo Artsmouth" class="header_logo">
+    <a href="/" aria-label="Accueil" class="logo-link">
+        <img src="assets/images/artsmouth_logo_text.png" alt="Logo Artsmouth" class="header_logo">
+    </a>
     <button class="hamburger" id="hamburger">
         <span></span>
         <span></span>
