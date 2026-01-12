@@ -45,7 +45,7 @@ html, body {
     }
 
     .full_container {
-        height: 650px;
+        height: auto;
     }
 
     .logo_mobile_home {
