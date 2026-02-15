@@ -15,7 +15,7 @@
 <nav class="vertical-menu" id="verticalMenu">
     <ul class="vertical-menu-list">
         <li><a href="index.php">HOME</a></li>
-        <li><a href="index.php#featured">FEATURE</a></li>
+        <li><a href="index.php#featured">FEATURED</a></li>
         <li><a href="index.php#contact">CONTACT</a></li>
         <li><a href="index.php#why">WHY</a></li>
         <li><a href="work.php">WORK</a></li>

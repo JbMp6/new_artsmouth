@@ -718,5 +718,17 @@
         "page": "video",
         "video": "https:\/\/player.vimeo.com\/video\/803591936",
         "visible": true
+    },
+    {
+        "id": 63,
+        "date": "2025-12-06",
+        "titre": "THE BACK FLIP TRIP \/ AROUND THE WORLD",
+        "desc": "Time : 00:56\r\nMotion Design by Artsmouth [2025]",
+        "featured_desc": "Artsmouth est de retour avec un nouveau projet motion design et une th\u00e8matique insolite : le backflip et le voyage.\u00a0Deux actes de rupture avec la routine et la s\u00e9curit\u00e9. Tous deux exigent confiance, courage et acceptation de l\u2019inconnu pour se transformer. Sauter ou partir devient alors un choix vital, plus riche que rester immobile. Cinquante-six secondes suspendues\u2026",
+        "image_bgrd": "admin\/uploads\/6933e8704b566_video_thebackfliptrip.jpg",
+        "featured_image": "admin\/uploads\/6933e8706676d_vignette TBFT_artsmouth.jpg",
+        "page": "video",
+        "video": "https:\/\/player.vimeo.com\/video\/1094178252",
+        "visible": true
     }
 ]
